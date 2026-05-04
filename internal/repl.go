@@ -52,11 +52,12 @@ func commandEcho(sArr args) error {
 }
 
 func commandType(sArr args) error {
-	if comm, ok := commands[sArr[0]]; ok {
+	c := strings.TrimSpace(sArr[0])
+	if comm, ok := commands[c]; ok {
 		fmt.Printf("%s is a shell %s", comm.name, comm.ctype)
 		return nil
 	} else {
-		fmt.Printf("%s: not found", sArr[0])
+		fmt.Printf("%s: not found", c)
 		return nil
 	}
 }
