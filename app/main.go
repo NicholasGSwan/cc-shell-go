@@ -14,16 +14,21 @@ func main() {
 	// TODO: Uncomment the code below to pass the first stage
 	for {
 		fmt.Print("$ ")
-		command, err := bufio.NewReader(os.Stdin).ReadString('\n')
+		commandString, err := bufio.NewReader(os.Stdin).ReadString('\n')
 		if err != nil {
 			fmt.Fprintln(os.Stderr, "Error reading input:", err)
 			os.Exit(1)
 		}
+		strArr := strings.Split(commandString, " ")
 
-		command = strings.TrimSpace(command)
+		command := strings.TrimSpace(strArr[0])
+		strArr = strArr[1 : len(strArr)-1]
 
-		if command == "exit" {
+		switch command {
+		case "exit":
 			os.Exit(0)
+		case "echo":
+			fmt.Println(strings.Join(strArr, " "))
 		}
 
 		fmt.Println(command + ": command not found")
