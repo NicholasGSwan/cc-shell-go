@@ -22,7 +22,7 @@ func main() {
 		strArr := strings.Split(commandString, " ")
 
 		command := strings.TrimSpace(strArr[0])
-		strArr = strArr[1 : len(strArr)-1]
+		strArr = strArr[1:]
 
 		switch command {
 		case "exit":
