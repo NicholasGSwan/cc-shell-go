@@ -78,7 +78,7 @@ func StartRepl() {
 		if comm, ok := commands[command]; ok {
 			comm.callback(strArr)
 		} else {
-			fmt.Println(command, ": command not found")
+			fmt.Println(command + ": command not found")
 		}
 
 	}
