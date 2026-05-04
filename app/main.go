@@ -29,9 +29,10 @@ func main() {
 			os.Exit(0)
 		case "echo":
 			fmt.Println(strings.Join(strArr, " "))
+		default:
+			fmt.Println(command + ": command not found")
 		}
 
-		fmt.Println(command + ": command not found")
 	}
 
 }
