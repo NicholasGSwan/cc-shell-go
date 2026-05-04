@@ -1,0 +1,84 @@
+package repl
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strings"
+)
+
+type args []string
+
+type cliCommand struct {
+	name        string
+	description string
+	ctype       string
+	callback    func(args) error
+}
+
+var commands map[string]cliCommand
+
+func init() {
+	commands = map[string]cliCommand{
+		"exit": {
+			name:        "exit",
+			description: "Exit the shell",
+			ctype:       "builtin",
+			callback:    commandExit,
+		},
+		"echo": {
+			name:        "echo",
+			description: "Return the text following the command",
+			ctype:       "builtin",
+			callback:    commandEcho,
+		},
+		"type": {
+			name:        "type",
+			description: "Describe the type of a command",
+			ctype:       "builtin",
+			callback:    commandType,
+		},
+	}
+}
+
+func commandExit(sArr args) error {
+	os.Exit(0)
+	return nil
+}
+
+func commandEcho(sArr args) error {
+	fmt.Print(strings.Join(sArr, " "))
+	return nil
+}
+
+func commandType(sArr args) error {
+	if comm, ok := commands[sArr[0]]; ok {
+		fmt.Printf("%s is a shell %s", comm.name, comm.ctype)
+		return nil
+	} else {
+		fmt.Printf("%s: not found")
+		return nil
+	}
+}
+
+func StartRepl() {
+	for {
+		fmt.Print("$ ")
+		commandString, err := bufio.NewReader(os.Stdin).ReadString('\n')
+		if err != nil {
+			fmt.Fprintln(os.Stderr, "Error reading input:", err)
+			os.Exit(1)
+		}
+		strArr := strings.Split(commandString, " ")
+
+		command := strings.TrimSpace(strArr[0])
+		strArr = strArr[1:]
+
+		if comm, ok := commands[command]; ok {
+			comm.callback(strArr)
+		} else {
+			fmt.Println(command, ": command not found")
+		}
+
+	}
+}
