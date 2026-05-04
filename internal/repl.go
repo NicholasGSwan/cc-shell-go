@@ -57,7 +57,7 @@ func commandType(sArr args) error {
 		fmt.Printf("%s is a shell %s\n", comm.name, comm.ctype)
 		return nil
 	} else {
-		fmt.Printf("%s: not found", c)
+		fmt.Printf("%s: not found\n", c)
 		return nil
 	}
 }
