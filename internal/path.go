@@ -11,7 +11,8 @@ type PathArray []string
 
 func GetPathArray() PathArray {
 	s := os.Getenv("PATH")
-	p := strings.Split(s, ";")
+
+	p := strings.Split(s, string(os.PathListSeparator))
 	return p
 }
 
