@@ -15,7 +15,7 @@ func GetPathArray() PathArray {
 	return p
 }
 
-func (p PathArray) CheckIfCommandExists(comm string) bool {
+func (p PathArray) CheckIfCommandExists(comm string) (bool, string) {
 	for _, dir := range p {
 		de, err := os.ReadDir(dir)
 		if err != nil {
@@ -25,11 +25,11 @@ func (p PathArray) CheckIfCommandExists(comm string) bool {
 		for _, entry := range de {
 			if comm == entry.Name() && !entry.Type().IsDir() {
 				cdir := filepath.Join(dir, comm)
-				fmt.Printf("%s is a valid command", cdir)
-				return true
+
+				return true, fmt.Sprintf("%s is a valid command", cdir)
 			}
 		}
 
 	}
-	return false
+	return false, ""
 }

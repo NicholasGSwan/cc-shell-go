@@ -17,6 +17,7 @@ type cliCommand struct {
 }
 
 var commands map[string]cliCommand
+var pathArray PathArray
 
 func init() {
 	commands = map[string]cliCommand{
@@ -39,6 +40,7 @@ func init() {
 			callback:    commandType,
 		},
 	}
+	pathArray = GetPathArray()
 }
 
 func commandExit(sArr args) error {
@@ -56,6 +58,8 @@ func commandType(sArr args) error {
 	if comm, ok := commands[c]; ok {
 		fmt.Printf("%s is a shell %s\n", comm.name, comm.ctype)
 		return nil
+	} else if ok, s := pathArray.CheckIfCommandExists(c); ok {
+		fmt.Print(s)
 	} else {
 		fmt.Printf("%s: not found\n", c)
 		return nil
