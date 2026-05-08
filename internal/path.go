@@ -23,10 +23,10 @@ func (p PathArray) CheckIfCommandExists(comm string) (bool, string) {
 			//fmt.Printf("Could not open file: %e", err)
 			break
 		}
-		fmt.Printf("Check for %s in dir %s", comm, dir)
+		fmt.Printf("Check for %s in dir %s\n", comm, dir)
 
 		for _, entry := range de {
-
+			fmt.Printf("%s found in dir %s\n", entry.Name(), dir)
 			if comm == entry.Name() {
 				cdir := filepath.Join(dir, comm)
 
