@@ -19,7 +19,7 @@ func GetPathArray() PathArray {
 func (p PathArray) CheckIfCommandExists(comm string) (bool, string) {
 	for _, dir := range p {
 		cdir := filepath.Join(dir, comm)
-		if _, err := os.Stat(cdir); err == nil {
+		if fi, err := os.Stat(cdir); err == nil && !fi.IsDir() {
 			return true, fmt.Sprintf("%s is %s\n", comm, cdir)
 		}
 
