@@ -60,6 +60,7 @@ func commandType(sArr args) error {
 		return nil
 	} else if ok, s := pathArray.CheckIfCommandExists(c); ok {
 		fmt.Print(s)
+		return nil
 	} else {
 		fmt.Printf("%s: not found\n", c)
 		return nil
