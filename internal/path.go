@@ -19,8 +19,8 @@ func GetPathArray() PathArray {
 func (p PathArray) CheckIfCommandExists(comm string) (bool, string) {
 	for _, dir := range p {
 		cdir := filepath.Join(dir, comm)
-		if fi, err := os.Stat(cdir); err == nil && !fi.IsDir() {
-			fmt.Printf("File perms for %s is %#o\n", cdir, fi.Mode())
+		if fi, err := os.Stat(cdir); err == nil && !fi.IsDir() && fi.Mode()%2 != 0 {
+			//fmt.Printf("File perms for %s is %#o\n", cdir, )
 			return true, fmt.Sprintf("%s is %s\n", comm, cdir)
 		}
 
