@@ -20,7 +20,7 @@ func (p PathArray) CheckIfCommandExists(comm string) (bool, string) {
 	for _, dir := range p {
 		cdir := filepath.Join(dir, comm)
 		if _, err := os.Stat(cdir); err == nil {
-			return true, fmt.Sprintf("%s is a valid command", cdir)
+			return true, fmt.Sprintf("%s is %s", comm, cdir)
 		}
 
 	}
