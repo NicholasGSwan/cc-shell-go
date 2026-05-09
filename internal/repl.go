@@ -87,9 +87,6 @@ func StartRepl() {
 			//fmt.Println("Preparing command: ", commStr, strArr)
 			cmd := exec.Command(commStr, strArr...)
 			if cmd.Err == nil {
-				for _, v := range cmd.Args {
-					fmt.Print(v)
-				}
 				err := cmd.Run()
 				if err != nil {
 					fmt.Println("Command failed to run: ", err)
