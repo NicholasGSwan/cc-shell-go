@@ -80,18 +80,16 @@ func StartRepl() {
 
 		command := strings.TrimSpace(strArr[0])
 		strArr = strArr[1:]
-		//fmt.Println("the number of args should be: ", len(strArr))
-
-		for _, v := range strArr {
-			fmt.Println(v)
-		}
 
 		if comm, ok := commands[command]; ok {
 			comm.callback(strArr)
 		} else if ok, _, commStr := pathArray.CheckIfCommandExists(command); ok {
-			fmt.Println("Preparing command: ", commStr, strArr)
+			//fmt.Println("Preparing command: ", commStr, strArr)
 			cmd := exec.Command(commStr, strArr...)
 			if cmd.Err == nil {
+				for _, v := range cmd.Args {
+					fmt.Print(v)
+				}
 				err := cmd.Run()
 				if err != nil {
 					fmt.Println("Command failed to run: ", err)
