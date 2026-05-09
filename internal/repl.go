@@ -89,6 +89,8 @@ func StartRepl() {
 			cmd := exec.Command(commStr, strArr...)
 			if cmd.Err == nil {
 				cmd.Run()
+			} else {
+				fmt.Println(cmd.Err.Error())
 			}
 		} else {
 			fmt.Println(command + ": command not found")
