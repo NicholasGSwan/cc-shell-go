@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"os/exec"
 	"strings"
 )
 
@@ -82,6 +83,11 @@ func StartRepl() {
 
 		if comm, ok := commands[command]; ok {
 			comm.callback(strArr)
+		} else if ok, commStr := pathArray.CheckIfCommandExists(command); ok {
+			cmd := exec.Command(commStr, strArr...)
+			if cmd.Err == nil {
+				cmd.Run()
+			}
 		} else {
 			fmt.Println(command + ": command not found")
 		}
