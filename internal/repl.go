@@ -79,7 +79,9 @@ func StartRepl() {
 		strArr := strings.Split(commandString, " ")
 
 		command := strings.TrimSpace(strArr[0])
-		strArr = strArr[1 : len(strArr)-1]
+		strArr = strArr[1:]
+		fmt.Println("the number of args should be: ", len(strArr))
+
 		for _, v := range strArr {
 			fmt.Println(v)
 		}
