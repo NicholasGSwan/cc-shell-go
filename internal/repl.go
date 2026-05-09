@@ -76,7 +76,7 @@ func StartRepl() {
 			fmt.Fprintln(os.Stderr, "Error reading input:", err)
 			os.Exit(1)
 		}
-		strArr := strings.Split(commandString, " ")
+		strArr := strings.Split(strings.TrimSpace(commandString), " ")
 
 		command := strings.TrimSpace(strArr[0])
 		strArr = strArr[1:]
@@ -91,7 +91,7 @@ func StartRepl() {
 				if err != nil {
 					fmt.Println("Command failed to run: ", err)
 				}
-				fmt.Println("the process state is: ", cmd.ProcessState)
+				//fmt.Println("the process state is: ", cmd.ProcessState)
 			} else {
 				fmt.Println(cmd.Err.Error())
 			}
