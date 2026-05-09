@@ -88,7 +88,10 @@ func StartRepl() {
 		} else if ok, commStr := pathArray.CheckIfCommandExists(command); ok {
 			cmd := exec.Command(commStr, strArr...)
 			if cmd.Err == nil {
-				cmd.Run()
+				err := cmd.Run()
+				if err != nil {
+					fmt.Println("Command failed to run: ", err)
+				}
 			} else {
 				fmt.Println(cmd.Err.Error())
 			}
