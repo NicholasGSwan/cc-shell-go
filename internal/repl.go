@@ -79,13 +79,8 @@ func StartRepl() {
 		strArr := strings.Split(commandString, " ")
 
 		command := strings.TrimSpace(strArr[0])
-		strArr = strArr[1:]
-		for _, v := range strArr {
-			fmt.Println(v)
-		}
-		if strArr[len(strArr)-1] == "" {
-			strArr = strArr[:len(strArr)-1]
-		}
+		strArr = strArr[1 : len(strArr)-1]
+
 		if comm, ok := commands[command]; ok {
 			comm.callback(strArr)
 		} else if ok, _, commStr := pathArray.CheckIfCommandExists(command); ok {
