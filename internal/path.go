@@ -32,8 +32,3 @@ func (p PathArray) CommandTypeFunc(comm string) (bool, string) {
 	exists, cmd, cmdDir := p.CheckIfCommandExists(comm)
 	return exists, fmt.Sprintf("%s is %s\n", cmd, cmdDir)
 }
-
-func (p PathArray) GetCommandString(comm string) (bool, string) {
-	exists, comm1, cdir := p.CheckIfCommandExists(comm)
-	return exists, filepath.Join(cdir, comm1)
-}
