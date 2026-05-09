@@ -87,10 +87,11 @@ func StartRepl() {
 			//fmt.Println("Preparing command: ", commStr, strArr)
 			cmd := exec.Command(commStr, strArr...)
 			if cmd.Err == nil {
-				err := cmd.Start()
+				err := cmd.Run()
 				if err != nil {
 					fmt.Println("Command failed to run: ", err)
 				}
+				fmt.Println("the process state is: ", cmd.ProcessState)
 			} else {
 				fmt.Println(cmd.Err.Error())
 			}
