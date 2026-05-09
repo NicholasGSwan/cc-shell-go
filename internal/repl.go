@@ -59,7 +59,7 @@ func commandType(sArr args) error {
 	if comm, ok := commands[c]; ok {
 		fmt.Printf("%s is a shell %s\n", comm.name, comm.ctype)
 		return nil
-	} else if ok, s := pathArray.CheckIfCommandExists(c); ok {
+	} else if ok, s := pathArray.CommandTypeFunc(c); ok {
 		fmt.Print(s)
 		return nil
 	} else {
@@ -85,7 +85,7 @@ func StartRepl() {
 		}
 		if comm, ok := commands[command]; ok {
 			comm.callback(strArr)
-		} else if ok, commStr := pathArray.CheckIfCommandExists(command); ok {
+		} else if ok, commStr := pathArray.GetCommandString(command); ok {
 			fmt.Println("Setting up command: ", commStr)
 			cmd := exec.Command(commStr, strArr...)
 			if cmd.Err == nil {

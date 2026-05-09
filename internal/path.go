@@ -16,14 +16,24 @@ func GetPathArray() PathArray {
 	return p
 }
 
-func (p PathArray) CheckIfCommandExists(comm string) (bool, string) {
+func (p PathArray) CheckIfCommandExists(comm string) (bool, string, string) {
 	for _, dir := range p {
 		cdir := filepath.Join(dir, comm)
 		if fi, err := os.Stat(cdir); err == nil && !fi.IsDir() && fi.Mode()%2 != 0 {
 			//fmt.Printf("File perms for %s is %#o\n", cdir, )
-			return true, fmt.Sprintf("%s is %s\n", comm, cdir)
+			return true, comm, cdir
 		}
 
 	}
-	return false, ""
+	return false, "", ""
+}
+
+func (p PathArray) CommandTypeFunc(comm string) (bool, string) {
+	exists, str1, str2 := p.CheckIfCommandExists(comm)
+	return exists, fmt.Sprintf("%s is %s\n", str1, str2)
+}
+
+func (p PathArray) GetCommandString(comm string) (bool, string) {
+	exists, str1, str2 := p.CheckIfCommandExists(comm)
+	return exists, filepath.Join(str1, str2)
 }
