@@ -83,9 +83,9 @@ func StartRepl() {
 
 		if comm, ok := commands[command]; ok {
 			comm.callback(strArr)
-		} else if ok, _, commStr := pathArray.CheckIfCommandExists(command); ok {
+		} else if ok, _, _ := pathArray.CheckIfCommandExists(command); ok {
 			//fmt.Println("Preparing command: ", commStr, strArr)
-			cmd := exec.Command(commStr, strArr...)
+			cmd := exec.Command(command, strArr...)
 			if cmd.Err == nil {
 				cmd.Stdout = os.Stdout
 				cmd.Stderr = os.Stderr
