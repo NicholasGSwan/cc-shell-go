@@ -80,6 +80,9 @@ func StartRepl() {
 
 		command := strings.TrimSpace(strArr[0])
 		strArr = strArr[1 : len(strArr)-1]
+		for _, v := range strArr {
+			fmt.Println(v)
+		}
 
 		if comm, ok := commands[command]; ok {
 			comm.callback(strArr)
