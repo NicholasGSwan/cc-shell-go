@@ -50,7 +50,7 @@ func commandExit(sArr args) error {
 }
 
 func commandEcho(sArr args) error {
-	fmt.Print(strings.Join(sArr, " "))
+	fmt.Print(strings.Join(sArr, " ") + "\n")
 	return nil
 }
 
