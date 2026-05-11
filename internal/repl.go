@@ -92,6 +92,9 @@ func commandPwd(sArr args) error {
 
 func commandCd(sArr args) error {
 	newDir := sArr[0]
+	if strings.TrimSpace(newDir) == "~" {
+		newDir = os.Getenv("HOME")
+	}
 	err := os.Chdir(newDir)
 	if err != nil {
 		fmt.Printf("cd: %s: No such file or directory\n", newDir)
