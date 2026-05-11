@@ -47,6 +47,12 @@ func init() {
 			ctype:       "builtin",
 			callback:    commandPwd,
 		},
+		"cd": {
+			name:        "cd",
+			description: "Change current working directory",
+			ctype:       "builtin",
+			callback:    commandCd,
+		},
 	}
 	pathArray = GetPathArray()
 }
@@ -81,6 +87,17 @@ func commandPwd(sArr args) error {
 		return err
 	}
 	fmt.Println(currDir)
+	return nil
+}
+
+func commandCd(sArr args) error {
+	newDir := sArr[0]
+	err := os.Chdir(newDir)
+	if err != nil {
+		fmt.Printf("cd: %s: No such file or directory\n", newDir)
+		return err
+	}
+	fmt.Println(newDir)
 	return nil
 }
 
