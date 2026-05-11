@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"strings"
 )
 
@@ -40,6 +41,12 @@ func init() {
 			ctype:       "builtin",
 			callback:    commandType,
 		},
+		"pwd": {
+			name:        "pwd",
+			description: "Print current working directory",
+			ctype:       "builtin",
+			callback:    commandPwd,
+		},
 	}
 	pathArray = GetPathArray()
 }
@@ -66,6 +73,15 @@ func commandType(sArr args) error {
 		fmt.Printf("%s: not found\n", c)
 		return nil
 	}
+}
+
+func commandPwd(sArr args) error {
+	currDir, err := filepath.Abs("")
+	if err != nil {
+		return err
+	}
+	fmt.Println(currDir)
+	return nil
 }
 
 func StartRepl() {
