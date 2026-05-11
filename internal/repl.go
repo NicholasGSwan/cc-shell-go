@@ -97,7 +97,7 @@ func commandCd(sArr args) error {
 		fmt.Printf("cd: %s: No such file or directory\n", newDir)
 		return err
 	}
-	fmt.Println(newDir)
+	//fmt.Println(newDir)
 	return nil
 }
 
